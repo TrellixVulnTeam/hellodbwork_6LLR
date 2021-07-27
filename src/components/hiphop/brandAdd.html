@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>10_브랜드등록수정</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500,700&amp;subset=korean">
+	<link rel="stylesheet" href="./css/plugin.css">
+	<link rel="stylesheet" href="./css/common.css">
+	<script type="text/javascript" src="./js/plugin.js"></script>
+</head>
+<body>
+	<div class="wrap">
+		<header class="header">
+			<div class="inner clear">
+				<h1><a href="" class="logo spr">힙합퍼</a></h1>
+				<div class="func clear">
+					<a href="" class="btn_alarm spr_before"><span class="length">12</span><span class="s_out">개의 알림 보기</span></a>
+					<div class="wrap_mymenu">
+						<div class="img_profile"><img src="./img/temp1.jpg" alt=""></div>
+						<button type="button" class="btn_mymenu">admin</button>
+					</div>
+				</a>
+			</div>
+		</header>
+		<main class="main clear">
+			<nav class="wrap_lnb">
+				<ul>
+					<li class="dashboard"><a href="" class="link">DASHBOARD</a></li>
+					<li><a href="" class="link">회원 관리</a></li>
+					<li><a href="" class="link">업체 관리</a></li>
+					<li><a href="" class="link">MD 관리</a></li>
+					<li><a href="" class="link">상품 관리</a>
+						<ul class="dep2">
+							<li><a href="" class="link">상품 조회/수정</a></li>
+							<li><a href="" class="link">상품 등록</a></li>
+							<li><a href="" class="link">상품 등록 심사</a></li>
+							<li><a href="" class="link">카테고리(분류) 관리</a></li>
+							<li><a href="" class="link on">브랜드 관리</a></li>
+						</ul>
+					</li>
+					<li><a href="" class="link open">브랜드 관리</a></li>
+					<li><a href="" class="link">매출/정산 관리</a></li>
+					<li><a href="" class="link">배너 관리</a></li>
+					<li><a href="" class="link">이벤트 관리</a></li>
+					<li><a href="" class="link">기획전 관리</a></li>
+					<li><a href="" class="link">쿠폰 관리</a></li>
+					<li><a href="" class="link">팝업 관리</a></li>
+					<li><a href="" class="link">에디터 보드 관리</a></li>
+					<li><a href="" class="link">Q&amp;A 관리</a></li>
+					<li><a href="" class="link">FAQ 관리</a></li>
+					<li><a href="" class="link">리뷰 관리</a></li>
+					<li><a href="" class="link">댓글 관리</a></li>
+				</ul>
+			</nav>
+			
+			<section class="content">
+				<h2 class="tit">브랜드 등록 or 수정</h2>
+				<form action="" class="wrap_table">
+					<fieldset>
+						<legend>브랜드 정보 등록 or 수정</legend>
+						<table class="table_vertical">
+							<colgroup>
+								<col style="width:150px;min-width:150px">
+								<col style="width:auto;">
+							</colgroup>
+							<tr>
+								<th>브랜드 기본 정보</th>
+								<td>
+									<div class="flex_type8 clear">
+										<div class="input_section">
+											<strong class="tit_section right">브랜드 코드</strong>
+											<span class="print_value">ABC123</span>
+										</div>
+										<div class="input_section">
+											<strong class="tit_section right">브랜드명 (한글)</strong>
+											<input type="text">
+										</div>
+										<div class="input_section">
+											<strong class="tit_section right">브랜드명 (영문)</strong>
+											<input type="text">
+										</div>
+										<div class="input_section">
+											<strong class="tit_section right">제조자</strong>
+											<input type="text">
+										</div>
+										<div class="input_section percent">
+											<strong class="tit_section right">브랜드 정상 수수료</strong>
+											<input type="number" min="28" max="30" value="30" readonly>
+										</div>
+										<div class="input_section percent">
+											<strong class="tit_section right">브랜드 협의 수수료</strong>
+											<input type="number" min="28" max="29" id="negoPie">
+										</div>
+										<button type="button" class="btn_narrow btn_st5" onclick="negoPieFn('#negoPie',pieOk)">협의</button>
+										<script type="text/javascript">
+											function pieOk(e){
+												alert('브랜드 협의 제출 완료');
+											}
+										</script>
+										<div class="input_section">
+											<strong class="tit_section right">노출 카테고리</strong>
+											<span class="input_check"><input type="checkbox" id="tempCheck01"><label for="tempCheck01">CLOTHING</label></span>
+											<span class="input_check"><input type="checkbox" id="tempCheck02"><label for="tempCheck02">FOOTWEAR</label></span>
+											<span class="input_check"><input type="checkbox" id="tempCheck03"><label for="tempCheck03">ACCESSORIES</label></span>
+										</div>
+										<div class="input_section">
+											<strong class="tit_section right">뱃지 노출</strong>
+											<span class="input_check"><input type="checkbox" id="tempCheck04"><label for="tempCheck04">BEST</label></span>
+											<span class="input_check"><input type="checkbox" id="tempCheck05"><label for="tempCheck05">NEW</label></span>
+											<span class="input_check"><input type="checkbox" id="tempCheck06"><label for="tempCheck06">SALE</label></span>
+											<span class="input_check"><input type="checkbox" id="tempCheck07"><label for="tempCheck07">해외배송</label></span>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th>브랜드 이미지 정보</th>
+								<td>
+									<div class="flex_type7">
+										<div class="set_thumbnail">
+											<div class="input_section">
+												<strong class="tit_section right">브랜드 로고</strong>
+												<button type="button" class="preview" disabled><span><img src="" alt="썸네일 미리보기 이미지" class="pos_center hide"></span></button>
+												<div class="input_thumbnail">
+													<span class="input_file">
+														<input type="text" class="txt_path">
+														<input type="file" name="" accept="image/x-png,image/gif,image/jpeg">
+													</span>
+													<button type="button" class="btn_del" data-type="filereset">삭제</button>
+												</div>
+											</div>
+											<div class="input_section">
+												<strong class="tit_section right">브랜드 페이지용</strong>
+												<button type="button" class="preview" disabled><span><img src="" alt="썸네일 미리보기 이미지" class="pos_center hide"></span></button>
+												<div class="input_thumbnail">
+													<span class="input_file">
+														<input type="text" class="txt_path">
+														<input type="file" name="" accept="image/x-png,image/gif,image/jpeg">
+													</span>
+													<button type="button" class="btn_del" data-type="filereset">삭제</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th>브랜드 소개 정보</th>
+								<td>
+									<div class="flex_type9">
+										<div class="input_section">
+											<strong class="tit_section right">브랜드 상세 설명</strong>
+											<div class="editor">
+												<img src=./img/temp2.gif alt="">
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</table>
+						<div class="btns">
+							<button type="submit" class="btn_st1">저장</button>
+						</div>
+					</fieldset>
+				</form>
+			</section>
+		</main>
+	</div>
+	<script type="text/javascript" src="./js/common.js"></script>
+</body>
+</html>

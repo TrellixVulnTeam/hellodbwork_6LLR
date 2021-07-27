@@ -1,0 +1,646 @@
+/*------------------------------------*\
+    breakpoint vars
+\*------------------------------------*/
+$break-320: 320px;
+$break-321: 321px;
+$break-480: 480px;
+$break-600: 600px;
+$break-768: 768px;
+$break-980: 980px;
+$break-1024: 1024px;
+$break-1200: 1200px;
+$break-1224: 1224px;
+$break-1280: 1280px;
+$break-1366: 1366px;
+$break-1824: 1824px;
+
+
+/*------------------------------------*\
+    breakpoint mixin
+\*------------------------------------*/
+//https://developers.google.com/web/fundamentals/design-and-ux/responsive/?hl=ko
+//orientation=portrait : 높이가 너비보다 크거나 같은 브라우저에 적용되는 규칙.
+//orientation=landscape : 너비가 높이보다 큰 브라우저에 적용되는 규칙.
+
+@mixin breakpoint($point){
+    @if $point == tablet{
+        @media (min-width: $break-768) { @content; }
+    }
+
+    @else if $point == desktop{
+        @media (min-width: $break-1280) { @content; }
+    }
+
+    // Smartphones (portrait and landscape)
+    @else if $point == mobile{
+        @media only screen
+        and (min-device-width : $break-320)
+        and (max-device-width : $break-480) { @content; }
+    }
+
+    @else if $point == mobileCustomLandscape{
+        @media only screen
+        and (min-device-width : $break-320)
+        and (max-device-width : $break-480)
+        and (orientation : landscape) { @content; }
+    }
+    
+    @else if $point == mobileCustomPortrait{
+        @media only screen
+        and (min-device-width : $break-320)
+        and (max-device-width : $break-480)
+        and (orientation : portrait) { @content; }
+    }    
+
+    // Smartphones (landscape)
+    @else if $point == mobileLandscape{
+        @media only screen
+        and (min-width : $break-321) { @content; }
+    }
+
+    // Smartphones (portrait)
+    @else if $point == mobilePortrait{
+        @media only screen
+        and (max-width : $break-320) { @content; }
+    }
+
+    // iPads (portrait and landscape)
+    @else if $point == ipad{
+        @media only screen
+        and (min-device-width : $break-768)
+        and (max-device-width : $break-1024) { @content; }
+    }
+
+    // iPads (landscape)
+    /*
+    @else if $point == ipadLandscape{
+        @media only screen
+        and (min-device-width : $break-768)
+        and (max-device-width : $break-1024)
+        and (orientation : landscape) { @content; }
+    }
+    */
+    @else if $point == ipadLandscape{
+        @media only screen
+        and (min-width : $break-768)
+        and (max-width : $break-1024)
+        and (orientation : landscape) { @content; }
+    }    
+
+    // iPads (portrait)
+    /*     
+    @else if $point == ipadPortrait{
+        @media only screen
+        and (min-device-width : $break-768)
+        and (max-device-width : $break-1024)
+        and (orientation : portrait) { @content; }
+    } 
+    */
+    @else if $point == ipadPortrait{
+        @media only screen
+        and (min-width : $break-768)
+        and (max-width : $break-1024)
+        and (orientation : portrait) { @content; }
+    }
+
+    // custom 
+    @else if $point == breakCustom{
+        @media only screen
+        and (min-width : $break-1024) { @content; }
+    }
+
+    // Desktops and laptops
+    @else if $point == desktopLaptop{
+        @media only screen
+        and (min-width : $break-1200) { @content; }
+    }
+
+    // Large screens
+    @else if $point == desktopLarge{
+        @media only screen
+        and (min-width : $break-1824) { @content; }
+    }
+
+    // iPhone 4
+    @else if $point == iphone{
+        @media
+        only screen and (-webkit-min-device-pixel-ratio : 1.5),
+        only screen and (min-device-pixel-ratio : 1.5) { @content; }
+    }    
+
+    @else if $point == iphone4Landscape{
+        @media
+        only screen and (-webkit-min-device-pixel-ratio : 1.5),
+        only screen and (min-device-pixel-ratio : 1.5)
+        and (orientation : landscape) { @content; }
+    }
+    @else if $point == iphone4Portrait{
+        @media
+        only screen and (-webkit-min-device-pixel-ratio : 1.5),
+        only screen and (min-device-pixel-ratio : 1.5)
+        and (orientation : portrait) { @content; }
+    }    
+}
+
+/*------------------------------------*\
+    breakpoint usage
+\*------------------------------------*/
+.container{
+    header{
+        @include breakpoint(tablet){ 
+            padding:4%;
+        }
+    }
+
+    .home-page{
+        .intro{
+            @include breakpoint(mobile){ 
+                //height:450px;
+            }
+            
+            @include breakpoint(iphone){
+                //height:450px;
+                //height:452px;
+            }
+
+            @include breakpoint(mobileLandscape){ height:100%; }
+
+            @include breakpoint(mobilePortrait){ height:100%; }
+
+            .intro-content{
+                padding:0 4%;
+
+                .intro-content-text{
+                    span{
+                        @include breakpoint(mobileLandscape){ font-size:23px; }
+                        @include breakpoint(mobilePortrait){ font-size:20px; }
+                        
+                        @include breakpoint(tablet){ font-size:50px; }
+
+                        @include breakpoint(desktopLaptop){ font-size:70px; }
+                    }
+                }
+            }
+        }
+        .work-list-wrap{
+            @include breakpoint(mobileLandscape){
+                //top:600px;
+            }
+            @include breakpoint(mobilePortrait){
+                //top:600px;
+            }
+            @include breakpoint(ipadLandscape){
+                //top:768px;
+            }
+            @include breakpoint(ipadPortrait){ 
+                //top:1024px;
+            }            
+
+            .work-list{
+                ul{
+                    li{
+                        a{
+                            @include breakpoint(desktopLaptop){
+                                max-width:$maxWidth;
+                            }
+
+                            img{
+                                @include breakpoint(mobileLandscape){
+                                    display:none;
+                                }
+                                @include breakpoint(mobilePortrait){
+                                    display:none;
+                                }                                
+                                @include breakpoint(tablet){
+                                    display:none;
+                                }
+                                @include breakpoint(desktopLaptop){
+                                    @include vertical-middle();
+                                    max-width:200px;
+                                    width:$fullSize;
+                                    opacity:0;
+                                    transform:translateY(0%);
+                                    transition:.3s ease;
+                                }
+                            }
+
+                            div.hidden{
+                                @include breakpoint(mobileLandscape){
+                                    display:none;
+                                }
+                                @include breakpoint(mobilePortrait){
+                                    display:none;
+                                }                                
+                                @include breakpoint(tablet){
+                                    display:none;
+                                }
+                                @include breakpoint(desktopLaptop){
+                                    display:block;
+                                }                                
+                            }
+                            
+                            span.client{
+                                @include breakpoint(mobileLandscape){ font-size:30px; }
+
+                                @include breakpoint(mobilePortrait){ font-size:30px; }
+
+                                @include breakpoint(ipadLandscape){ font-size:50px; }
+
+                                @include breakpoint(ipadPortrait){ font-size:50px; }
+
+                                @include breakpoint(breakCustom){ font-size:55px; }                                
+                            }                            
+                            
+                            span.label{
+                                @include breakpoint(mobileLandscape){ display:none; }
+                                
+                                @include breakpoint(mobilePortrait){ display:none; }                                
+                                
+                                @include breakpoint(tablet){ display:none; }
+                                
+                                @include breakpoint(desktopLaptop){
+                                    @include vertical-middle();
+                                    text-align:right;
+                                    opacity:0;
+                                    font-size:12px;
+                                }
+                            }                               
+                        }
+                    }
+                }
+            }
+        }        
+    }
+
+    .about-page{
+        .about-col{
+            @include breakpoint(mobileLandscape){
+                max-width:100%;
+                margin:45% 4% 6% 4%;
+            }
+
+            @include breakpoint(mobilePortrait){
+                max-width:100%;
+                margin:45% 4% 6% 4%;
+            }            
+
+            @include breakpoint(tablet){
+                max-width:40%;
+                margin:26% 0 6.5% 48%;
+            }
+
+            .about-col-profile{
+                h1{
+                    @include breakpoint(mobileLandscape){ font-size:22px; }
+
+                    @include breakpoint(mobilePortrait){ font-size:22px; }
+
+                    @include breakpoint(tablet){ font-size:40px; }
+                }
+
+                p{
+                    @include breakpoint(mobileLandscape){ font-size:13px; }
+
+                    @include breakpoint(mobilePortrait){ font-size:13px; }
+
+                    @include breakpoint(tablet){ font-size:16px; }
+                }
+            }   
+
+            .about-col-links{
+                a{
+                    span{
+                        @include breakpoint(mobileLandscape){ font-size:45px; }
+
+                        @include breakpoint(mobilePortrait){ font-size:45px; }
+
+                        @include breakpoint(tablet){ font-size:70px; }
+                    }
+                }
+            } 
+        }            
+    }
+    
+    .work-page{
+        .work-wrap{
+            article{
+                .work-fixed-wrap{
+                    .work-fixed{
+                        @include breakpoint(tablet){ position:fixed; }
+                        
+                        .work-title{
+                            @include breakpoint(mobileLandscape){ font-size:40px; }
+
+                            @include breakpoint(mobilePortrait){ font-size:40px; }
+
+                            @include breakpoint(tablet){ font-size:80px; }
+                        }
+                        
+                        .work-info{
+                                @include breakpoint(mobileLandscape){
+                                    bottom:4%;
+                                    text-align:center;
+                                }    
+
+                                @include breakpoint(mobilePortrait){
+                                    bottom:4%;
+                                    text-align:center;
+                                }
+
+                                @include breakpoint(tablet){ bottom:5%; text-align:left; }
+
+                            .work-exp{
+                                @include breakpoint(mobileLandscape){ width:100%; }
+
+                                @include breakpoint(mobilePortrait){ width:100%; }
+
+                                @include breakpoint(tablet){
+                                    float:left;
+                                    width:38%;
+                                }
+                                p{
+                                    @include breakpoint(mobileLandscape){ font-size:14px; }
+
+                                    @include breakpoint(mobilePortrait){ font-size:14px; }
+
+                                    @include breakpoint(tablet){ font-size:16px; }                                    
+                                }
+                            }
+                          
+                            .work-link{
+                                @include breakpoint(mobileLandscape){
+                                    width:40px;
+                                    height:40px;
+                                    margin-top:20px;
+                                }    
+
+                                @include breakpoint(mobilePortrait){
+                                    width:40px;
+                                    height:40px;
+                                    margin-top:20px;
+                                }
+
+                                @include breakpoint(tablet){
+                                    float:right;
+                                    width:50px;
+                                    height:50px;
+                                    margin-right:10px;
+                                }
+
+                                a{
+                                    @include breakpoint(mobileLandscape){
+                                        width:40px;
+                                        height:40px;
+                                        padding:10px;
+                                        font-size:10px;
+                                    }    
+
+                                    @include breakpoint(mobilePortrait){
+                                        width:40px;
+                                        height:40px;
+                                        padding:10px;
+                                        font-size:10px;
+                                    }
+
+                                    @include breakpoint(tablet){
+                                        width:50px;
+                                        height:50px;
+                                        padding:12px;                                        
+                                        font-size:13px;
+                                    }                                
+                                }
+                            }
+                        }                        
+                    }
+                }
+
+                .work-content{
+
+                    .work-content-wrap{
+                        @include breakpoint(mobileLandscape){ padding:0 8%; }
+
+                        @include breakpoint(mobilePortrait){ padding:0 8%; }
+
+                        @include breakpoint(tablet){ padding:0 4%; }
+
+                        .work-img-center{
+                            @include breakpoint(mobileLandscape){ margin:0 0 100px 0; }
+
+                            @include breakpoint(mobilePortrait){ margin:0 0 100px 0; }
+
+                            @include breakpoint(tablet){ margin:0 0 180px 0; }
+
+                            .work-fluid{
+
+                                .work-outer{
+
+                                    .work-inner{
+
+                                        .work-screen{
+                                            .mac-img-background{
+
+                                            }
+
+                                            .mac-base{
+                                                @include breakpoint(mobileLandscape){ width:100%; }
+
+                                                @include breakpoint(mobilePortrait){ width:100%; }
+
+                                                @include breakpoint(tablet){ width:55%; }
+                                            }
+
+                                            .slick-slider-custom-css{
+                                                @include breakpoint(mobileLandscape){ width:76.1%; }
+
+                                                @include breakpoint(mobilePortrait){ width:76.1%; }
+
+                                                @include breakpoint(tablet){ width:41.8%; }
+                                            }
+                                            
+                                            .mac-work-view{
+
+                                            }                                            
+
+                                            .ipad-base{
+                                                @include breakpoint(mobileLandscape){ width:100%; }
+
+                                                @include breakpoint(mobilePortrait){ width:100%; }
+
+                                                @include breakpoint(tablet){ width:40%; }
+                                            }
+
+                                            .work-view{
+                                                @include breakpoint(mobileLandscape){
+                                                    width:86.6%;
+                                                    top:9.3%;
+                                                }    
+
+                                                @include breakpoint(mobilePortrait){
+                                                    width:86.6%;
+                                                    top:9.3%;
+                                                }
+
+                                                @include breakpoint(tablet){
+                                                    width:35%;
+                                                    top:9.1%;
+                                                }
+                                            }
+
+                                            &:after{
+                                                @include breakpoint(mobileLandscape){
+                                                    width:86.6%;
+                                                    height:82%;
+                                                }    
+
+                                                @include breakpoint(mobilePortrait){
+                                                    width:86.6%;
+                                                    height:82%;
+                                                }
+
+                                                @include breakpoint(tablet){
+                                                    //top:9%;
+                                                    width:35%;
+                                                    height:83%;
+                                                }
+                                            }
+                                        }
+
+                                        .work-screen.skplanet,
+                                        .work-screen.branded-works,
+                                        .work-screen.walnuts{
+                                          &:after{
+                                            @include breakpoint(mobileLandscape){ 
+                                                width:76.1%;
+                                                height:72%;                                                
+                                            }
+
+                                            @include breakpoint(mobilePortrait){ 
+                                                width:76.1%;
+                                                height:72%;                                                
+                                            }
+
+                                            @include breakpoint(tablet){ 
+                                                width:42%;
+                                                height:73%;
+                                            }
+                                          }
+                                        }
+
+                                        .slider-meta{
+                                            @include breakpoint(mobileLandscape){ display:none; }
+
+                                            @include breakpoint(mobilePortrait){ display:none; }
+
+                                            @include breakpoint(tablet){ display:inline-block; }
+
+                                        }
+
+                                        .work-meta{
+                                            @include breakpoint(mobileLandscape){ display:none; }    
+
+                                            @include breakpoint(mobilePortrait){ display:none; }                                            
+                                            
+                                            @include breakpoint(tablet){ display:inline-block; }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .work-img-left{
+                            @include breakpoint(mobileLandscape){ margin:0 0 100px 0; }
+
+                            @include breakpoint(mobilePortrait){ margin:0 0 100px 0; }
+
+                            @include breakpoint(tablet){ margin:0 0 180px 0; }
+
+                            .work-fluid{
+                                .work-outer{
+                                    @include breakpoint(mobileLandscape){
+                                        max-width:45%;
+                                        margin:0 auto;
+                                    }
+
+                                    @include breakpoint(mobilePortrait){
+                                        max-width:45%;
+                                        margin:0 auto;
+                                    }
+
+                                    @include breakpoint(tablet){
+                                        max-width:18%;
+                                        float:left;
+                                        margin:0 25px;
+                                    }
+                                    
+                                    .work-inner{
+                                        .work-meta{
+                                            @include breakpoint(mobileLandscape){ display:none; }    
+
+                                            @include breakpoint(mobilePortrait){ display:none; }                                            
+                                            
+                                            @include breakpoint(tablet){ display:inline-block; }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                        .work-img-right{
+                            @include breakpoint(mobileLandscape){ margin:0 0 100px 0; }
+
+                            @include breakpoint(mobilePortrait){ margin:0 0 100px 0; }
+
+                            @include breakpoint(tablet){ margin:0 0 180px 0; }
+
+                            .work-fluid{
+                                .work-outer{
+                                    @include breakpoint(mobileLandscape){
+                                        max-width:45%;
+                                        margin:0 auto;
+                                    }
+
+                                    @include breakpoint(mobilePortrait){
+                                        max-width:45%;
+                                        margin:0 auto;
+                                    }
+
+                                    @include breakpoint(tablet){
+                                        max-width:18%;
+                                        float:right;
+                                        margin:0 25px;
+                                    }
+                                    
+                                    .work-inner{
+                                        .work-meta{
+                                            @include breakpoint(mobileLandscape){ display:none; }    
+
+                                            @include breakpoint(mobilePortrait){ display:none; }                                            
+                                            
+                                            @include breakpoint(tablet){ display:inline-block; }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .arc{
+        @include breakpoint(mobileLandscape){ display:none; }
+
+        @include breakpoint(mobilePortrait){ display:none; }
+        @include breakpoint(tablet){ 
+            display:block;
+            //z-index:-1;
+        }
+    }
+    .work-percent-line{
+        @include breakpoint(mobileLandscape){ display:none; }
+
+        @include breakpoint(mobilePortrait){ display:none; }
+        
+        @include breakpoint(tablet){ display:inline-block; }
+    }
+}
